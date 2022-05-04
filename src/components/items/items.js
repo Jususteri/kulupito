@@ -1,4 +1,5 @@
 import Item from '../item'
+import Button from '../shared/uibuttons';
 
 function Items(props) {
     return ( 
@@ -7,7 +8,8 @@ function Items(props) {
             <Item />
             <Item />
             <Item />
-            <Item />
+            <Item /> 
+           <Button>Lisää uusi rivi</Button>
         </div>
     )
 }
