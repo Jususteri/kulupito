@@ -1,5 +1,5 @@
-import Item from '../item'
-import { FloatingButton, ButtonContainer } from '../shared/uibuttons';
+import Item from '../../components/item'
+import { FloatingButton, ButtonContainer } from '../../components/shared/uibuttons';
 
 function Items(props) {
     return ( 
