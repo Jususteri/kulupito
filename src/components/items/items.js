@@ -9,7 +9,7 @@ function Items(props) {
             <Item />
             <Item />
             <Item /> 
-           <Button>Lisää uusi rivi</Button>
+           <Button disabled>Lisää uusi rivi</Button>
         </div>
     )
 }
