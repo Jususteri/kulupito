@@ -7,6 +7,7 @@ import Stats from '../../routes/stats';
 import Settings from '../../routes/settings';
 import Menu from '../menu'
 import { ButtonAppContainer } from '../shared/uibuttons';
+import testdata from '../../testdata.js';
 
 
 
@@ -18,7 +19,7 @@ function App() {
          <Header />
           <Content>
              <Route exact path="/">
-               <Items />
+               <Items data={testdata} />
              </Route>
              <Route path="/stats">
                <Stats />
