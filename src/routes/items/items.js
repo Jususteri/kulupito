@@ -1,4 +1,5 @@
-import Item from '../../components/item'
+import { Link } from 'react-router-dom';
+import Item from '../../components/item';
 import { FloatingButton, ButtonContainer } from '../../components/shared/uibuttons';
 
 function Items(props) {
@@ -10,7 +11,7 @@ function Items(props) {
         <ButtonContainer>
         <div>
             { items }
-           <FloatingButton secondary>+</FloatingButton>
+           <Link to="/add"><FloatingButton secondary>+</FloatingButton></Link>
         </div>
         </ButtonContainer>
     )
