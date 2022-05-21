@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { useState, useEffect} from 'react';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 import styles from './app.module.scss';
 import Header from '../header';
 import Content from '../content';
@@ -7,31 +8,42 @@ import Stats from '../../routes/stats';
 import Settings from '../../routes/settings';
 import AddItem from '../../routes/additem';
 import Menu from '../menu'
-import { ButtonAppContainer } from '../shared/uibuttons';
+import { ButtonAppContainer } from '../../shared/uibuttons';
 import testdata from '../../testdata.js';
 
 
 
-
-// SELVITÄ ENSIN MIKÄ VAIVAA /add välilehden tyylimäärittelyjä
-// SITTEN SELVITÄ MIKSI react-hooks palikka herjaa jostakin
-// ja kun ongelmat selvitetty vie version hallintaan
-// commitilla "useForm React Hooks added" 
-// ja
-// SEURAAVAKSI ---->>>> useFormin käyttö (video, 15:19)
-
-
-
-
 function App() {
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setData(testdata);
+  }, []);
+
+  const handleItemSubmit = (newitem) => {
+    let storeddata = data.slice();
+    storeddata.push(newitem);
+
+    storeddata.sort((a,b) => {
+      const aDate = new Date(a.paymentDate);
+      const bDate = new Date(b.paymentDate);
+      return bDate.getTime() - aDate.getTime();
+    }
+    );
+
+    setData(storeddata);
+  }
+
   return (
     <ButtonAppContainer>
     <div className={styles.app}>
-      <Router>
+     
+      <Router forceRefresh={true}>
          <Header />
           <Content>
              <Route exact path="/">
-               <Items data={testdata} />
+               <Items data={data} />
              </Route>
              <Route path="/stats">
                <Stats />
@@ -40,7 +52,7 @@ function App() {
                <Settings />
              </Route>
              <Route path="/add">
-                <AddItem />
+                <AddItem onItemSubmit={handleItemSubmit} />
              </Route>
            </Content>
           <Menu />

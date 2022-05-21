@@ -7,7 +7,7 @@ function AddItem(props) {
         <div>
             <h2>Uuden merkinnän lisääminen otsikoksi
             </h2>
-            <ItemForm />
+            <ItemForm onItemSubmit={props.onItemSubmit} />
         </div>
     );
 }
