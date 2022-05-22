@@ -15,10 +15,9 @@ function ItemForm(props) {
     storedvalues.id = storedvalues.id ? storedvalues.id : uuidv4();
     props.onItemSubmit(storedvalues);
     history.push("/");
-    history.go();
     }
 
-    const initialState = {
+    const initialState = props.data ? props.data : {
 
         type: "",
         amount: 0,
@@ -36,6 +35,12 @@ function ItemForm(props) {
 
     }
 
+    const handleDelete = (event) => {
+        event.preventDefault();
+        props.onItemDelete(values.id);
+        history.push("/");
+    }
+
     return ( 
     <div>
      <form onSubmit={handleSubmit}>
@@ -44,8 +49,8 @@ function ItemForm(props) {
                 <div>
                     <label htmlFor="type">Kulutyyppi</label>
                     <select name="type" onChange={handleChange} value={values.type}>
-                        <option value="Sähkö">Sähkö</option>
-                        <option value="Vesi">Vesi</option>
+                       { props.types.map((type) =>
+                       <option key={type} value={type}>{type}</option> ) }
                     </select>
                 </div>
             </div>
@@ -64,7 +69,7 @@ function ItemForm(props) {
                 </div>
         </div> 
         
-        <div className={styles.form_row}>
+        <div className={styles.form_row}> 
                 <div>
                     <label htmlFor="periodStart">Laskutuskauden alku</label>
                     <input type="date" name="periodStart" 
@@ -88,9 +93,17 @@ function ItemForm(props) {
                     <Button onClick={handleCancel}>Peruuta</Button>
                 </div> 
                 <div>
-                    <Button primary type="submit">Lisää</Button>
+                    <Button primary type="submit">{ props.data ? "Tallenna" : "Lisää"}</Button>
                 </div> 
                 </div> 
+
+                {props.onItemDelete ? 
+                <div className={styles.form_row}>
+                <div>
+                    <Button onClick={handleDelete}>Poista</Button>
+                </div> 
+                <div></div>
+                </div> : "" }                 
                 </div> 
       </form>       
     </div>

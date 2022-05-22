@@ -4,10 +4,10 @@ import styles from './additem.module.scss';
 
 function AddItem(props) {
     return (
-        <div>
+        <div className={styles.additem}>
             <h2>Uuden merkinnän lisääminen otsikoksi
             </h2>
-            <ItemForm onItemSubmit={props.onItemSubmit} />
+            <ItemForm onItemSubmit={props.onItemSubmit} types={props.types} />
         </div>
     );
 }
