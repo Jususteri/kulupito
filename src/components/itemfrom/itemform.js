@@ -19,9 +19,9 @@ function ItemForm(props) {
 
     const initialState = props.data ? props.data : {
 
-        type: "",
+        type: props.types?props.types[0] : "",
         amount: 0,
-        paymentDate: "",
+        paymentDate: new Date().toISOString().substring(0,10),
         periodStart: "",
         periodEnd: "",
         receiver: ""
@@ -48,7 +48,7 @@ function ItemForm(props) {
             <div className={styles.form_row}>
                 <div>
                     <label htmlFor="type">Kulutyyppi</label>
-                    <select name="type" onChange={handleChange} value={values.type}>
+                    <select name="type" onChange={handleChange} value={values.type} required>
                        { props.types.map((type) =>
                        <option key={type} value={type}>{type}</option> ) }
                     </select>
@@ -59,12 +59,12 @@ function ItemForm(props) {
                     <div>
                     <label htmlFor="amount">Summa</label>
                     <input type="number" name="amount" step="0.01" 
-                   onChange={handleChange} value={values.amount} />
+                   onChange={handleChange} value={values.amount} required/>
                     </div>
                 <div>
                     <label htmlFor="paymentDate">Maksupäivä</label>
                     <input type="date" name="paymentDate" 
-                   onChange={handleChange} value={values.paymentDate} />
+                   onChange={handleChange} value={values.paymentDate} required />
                 </div> 
                 </div>
         </div> 
@@ -85,7 +85,7 @@ function ItemForm(props) {
                 <div>
                     <label htmlFor="receiver">Saaja</label>
                     <input type="text" name="receiver" 
-                   onChange={handleChange} value={values.receiver} />
+                   onChange={handleChange} value={values.receiver} required />
                 </div>    
                 </div>  
                 <div className={styles.form_row}>

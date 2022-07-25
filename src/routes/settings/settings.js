@@ -1,6 +1,8 @@
 import styles from './settings.module.scss';
 import Button from '../../shared/uibuttons';
 import { useUser, useAuth } from 'reactfire';
+import { useHistory } from "react-router-dom";
+
 
 
 
@@ -9,10 +11,15 @@ function Settings(props) {
 
     const user = useUser();
     const auth = useAuth();
+    const history = useHistory();
+
 
 
     const signOut = async () => {
         await auth.signOut();
+        history.push('.');
+        window.location.reload(); 
+
     }
 
 
